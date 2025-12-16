@@ -1,0 +1,44 @@
+{
+  "name": "college-dating-app",
+  "version": "1.0.0",
+  "description": "Dating website for college students with cluster-based matching",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "server": "node server/index.js",
+    "dev:server": "nodemon server/index.js",
+    "seed": "node server/seed.js",
+    "check:mongodb": "node server/check-mongodb.js",
+    "mongodb:install": "powershell -ExecutionPolicy Bypass -File install-mongodb.ps1",
+    "mongodb:start": "powershell -ExecutionPolicy Bypass -File start-mongodb.ps1"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.0",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-globe.gl": "^2.37.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.16",
+    "nodemon": "^3.0.2",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.0"
+  }
+}
