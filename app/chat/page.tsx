@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
+import API_URL from '@/lib/api'
 
 interface Match {
   id: string
@@ -35,7 +36,7 @@ export default function ChatInboxPage() {
     const load = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches`,
+          `${API_URL}/api/matches`,
           { headers: getAuthHeaders() }
         )
         setMatches(res.data)

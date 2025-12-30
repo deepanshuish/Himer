@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import axios from 'axios'
+import API_URL from '@/lib/api'
 
 interface College {
   _id: string
@@ -35,7 +36,7 @@ export default function SignupPage() {
     const loadColleges = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/colleges`
+          `${API_URL}/api/colleges`
         )
         setColleges(res.data)
       } catch (e) {
@@ -54,10 +55,10 @@ export default function SignupPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/register`,
+        `${API_URL}/api/auth/register`,
         formData
       )
-      
+
       localStorage.setItem('token', response.data.token)
       router.push('/onboarding')
     } catch (err: any) {
@@ -65,7 +66,7 @@ export default function SignupPage() {
       if (err.response) {
         setError(err.response.data?.message || 'Registration failed. Please try again.')
       } else if (err.request) {
-        setError('Cannot connect to server. Please make sure the backend server is running on port 5000.')
+        setError('Cannot connect to server. Please make sure the backend server is running on port 5001.')
       } else {
         setError('Registration failed. Please try again.')
       }

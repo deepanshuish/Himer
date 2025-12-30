@@ -1,29 +1,38 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const User = require('../models/User');
-const College = require('../models/College');
-const Cluster = require('../models/Cluster');
+const prisma = require('../utils/prisma');
 const { authenticate, JWT_SECRET } = require('../middleware/auth');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcryptjs');
+
+// Helper to get offline data
+function getOfflineData(file) {
+  try {
+    const p = path.join(__dirname, `../data/${file}`);
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch (e) { }
+  return [];
+}
+
+function saveOfflineData(file, data) {
+  try {
+    const dir = path.join(__dirname, '../data');
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    fs.writeFileSync(path.join(dir, file), JSON.stringify(data, null, 2));
+  } catch (e) {
+    console.error(`Error saving ${file}:`, e);
+  }
+}
 
 // Register
 router.post('/register', async (req, res) => {
-	  try {
-	    // Check MongoDB connection
-    if (mongoose.connection.readyState !== 1) {
-      return res.status(503).json({ 
-        message: 'Database not connected. Please check MongoDB connection.',
-        error: 'MongoDB connection is not ready. Make sure MongoDB is running.'
-      });
-    }
+  try {
+    const { email, password, firstName, lastName, name, gender, collegeStatus, collegeId } = req.body;
 
-	    const { email, password, firstName, lastName, name, gender, collegeStatus, collegeId } = req.body;
-
-    // Derive first/last name from single "name" field if provided
     let finalFirstName = firstName;
     let finalLastName = lastName;
-
     if (!finalFirstName && !finalLastName && name) {
       const parts = name.trim().split(/\s+/);
       finalFirstName = parts.shift();
@@ -33,83 +42,113 @@ router.post('/register', async (req, res) => {
     if (!email || !password || !finalFirstName || !collegeId) {
       return res.status(400).json({ message: 'Name, email, password, and college are required' });
     }
-
-    // Ensure lastName is present to satisfy schema validation
     finalLastName = finalLastName || finalFirstName || 'User';
 
-    // Check if user exists
-	    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    // Try Prisma (SQL) first
+    try {
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      if (existingUser) return res.status(400).json({ message: 'User already exists' });
+
+      const college = await prisma.college.findUnique({ where: { id: collegeId } });
+      if (!college) return res.status(400).json({ message: 'Invalid college selection' });
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const user = await prisma.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+          firstName: finalFirstName,
+          lastName: finalLastName,
+          gender,
+          collegeStatus,
+          collegeId: college.id,
+          clusterId: college.clusterId,
+          isVerified: true
+        },
+        include: {
+          college: true,
+          cluster: true
+        }
+      });
+
+      const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' });
+      return res.status(201).json({
+        message: 'User created successfully',
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          gender: user.gender,
+          collegeStatus: user.collegeStatus,
+          college: user.college.name,
+          cluster: user.cluster?.name || 'No Cluster',
+          hasCompletedOnboarding: user.hasCompletedOnboarding,
+          homepageUnlockAt: user.homepageUnlockAt
+        }
+      });
+    } catch (dbError) {
+      console.warn('Prisma Registration Error, falling back to offline:', dbError.message);
+    }
+
+    // --- OFFLINE FALLBACK ---
+    const users = getOfflineData('users.json');
+    if (users.find(u => u.email === email)) {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // College is chosen by dropdown (no email verification)
-    const college = await College.findById(collegeId);
-    if (!college) {
-      return res.status(400).json({ message: 'Invalid college selection' });
-    }
+    const colleges = getOfflineData('colleges.json');
+    const clustersData = getOfflineData('clusters.json');
 
-    // Get or assign cluster
-    let cluster = null;
-    
-    if (college.clusterId) {
-      cluster = await Cluster.findById(college.clusterId).populate('colleges');
-    }
-    
-    if (!cluster) {
-      return res.status(400).json({
-        message: 'This college is not assigned to a cluster yet. Please run the seed script to generate clusters.',
-      });
-    }
+    const college = colleges.find(c => c._id === collegeId || c.id === collegeId);
+    if (!college) return res.status(400).json({ message: 'Invalid college selection' });
 
-    // Create user
-	    const user = new User({
+    const cluster = clustersData.find(c => c._id === college.clusterId || c.id === college.clusterId);
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = {
+      _id: 'user_' + Date.now(),
+      id: 'user_' + Date.now(),
       email,
-      password,
+      password: hashedPassword,
       firstName: finalFirstName,
       lastName: finalLastName,
-	      gender,
-	      collegeStatus,
-	      college: college._id,
-	      cluster: cluster._id,
-	      isVerified: true, // No email verification in this version
-	    });
+      gender,
+      collegeStatus,
+      collegeId: college._id || college.id,
+      clusterId: cluster ? (cluster._id || cluster.id) : null,
+      isVerified: true,
+      hasCompletedOnboarding: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
 
-    await user.save();
+    users.push(newUser);
+    saveOfflineData('users.json', users);
 
-    // Generate token
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ userId: newUser.id }, JWT_SECRET, { expiresIn: '7d' });
 
-	    res.status(201).json({
-	      message: 'User created successfully',
-	      token,
-	      user: {
-	        id: user._id,
-	        email: user.email,
-	        firstName: user.firstName,
-	        lastName: user.lastName,
-	        gender: user.gender,
-	        collegeStatus: user.collegeStatus,
-	        college: college.name,
-	        cluster: cluster.name,
-	        hasCompletedOnboarding: user.hasCompletedOnboarding,
-	        homepageUnlockAt: user.homepageUnlockAt,
-	      },
-	    });
+    res.status(201).json({
+      message: 'User created successfully (Offline Mode)',
+      token,
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        gender: newUser.gender,
+        collegeStatus: newUser.collegeStatus,
+        college: college.name,
+        cluster: cluster ? cluster.name : 'Unknown Cluster',
+        hasCompletedOnboarding: false
+      }
+    });
+
   } catch (error) {
     console.error('Registration error:', error);
-    // Check if it's a validation error
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ 
-        message: 'Validation error', 
-        error: Object.values(error.errors).map(e => e.message).join(', ')
-      });
-    }
-    res.status(500).json({ 
-      message: 'Server error', 
-      error: error.message,
-      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
-    });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
@@ -118,34 +157,72 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-	    const user = await User.findOne({ email }).populate('college cluster');
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+    // Prisma Mode
+    try {
+      const user = await prisma.user.findUnique({
+        where: { email },
+        include: { college: true, cluster: true }
+      });
+
+      if (user) {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (isMatch) {
+          const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' });
+          return res.json({
+            message: 'Login successful',
+            token,
+            user: {
+              id: user.id,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              gender: user.gender,
+              collegeStatus: user.collegeStatus,
+              college: user.college?.name,
+              cluster: user.cluster?.name,
+              hasCompletedOnboarding: user.hasCompletedOnboarding,
+              homepageUnlockAt: user.homepageUnlockAt
+            }
+          });
+        }
+      }
+    } catch (dbError) {
+      console.warn('Prisma Login Error, falling back to offline:', dbError.message);
     }
 
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
+    // Offline Mode
+    const users = getOfflineData('users.json');
+    const user = users.find(u => u.email === email);
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '7d' });
+    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
 
-	    res.json({
-	      message: 'Login successful',
-	      token,
-	      user: {
-	        id: user._id,
-	        email: user.email,
-	        firstName: user.firstName,
-	        lastName: user.lastName,
-	        gender: user.gender,
-	        collegeStatus: user.collegeStatus,
-	        college: user.college?.name,
-	        cluster: user.cluster?.name,
-	        hasCompletedOnboarding: user.hasCompletedOnboarding,
-	        homepageUnlockAt: user.homepageUnlockAt,
-	      },
-	    });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+
+    const colleges = getOfflineData('colleges.json');
+    const clusters = getOfflineData('clusters.json');
+    const userCollege = colleges.find(c => c._id === user.collegeId || c.id === user.collegeId);
+    const userCluster = clusters.find(c => c._id === user.clusterId || c.id === user.clusterId);
+
+    const token = jwt.sign({ userId: user.id || user._id }, JWT_SECRET, { expiresIn: '7d' });
+
+    res.json({
+      message: 'Login successful (Offline)',
+      token,
+      user: {
+        id: user.id || user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        gender: user.gender,
+        collegeStatus: user.collegeStatus,
+        college: userCollege ? userCollege.name : 'Unknown',
+        cluster: userCluster ? userCluster.name : 'Unknown',
+        hasCompletedOnboarding: user.hasCompletedOnboarding,
+        homepageUnlockAt: user.homepageUnlockAt
+      }
+    });
+
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -155,14 +232,37 @@ router.post('/login', async (req, res) => {
 // Get current user
 router.get('/me', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .select('-password')
-      .populate('college cluster');
-    res.json(user);
+    const user = req.user;
+
+    // If it's a SQL user (checking for id property and prisma availability)
+    try {
+      const fullUser = await prisma.user.findUnique({
+        where: { id: user.id },
+        include: { college: true, cluster: true }
+      });
+      if (fullUser) {
+        delete fullUser.password;
+        return res.json(fullUser);
+      }
+    } catch (e) { }
+
+    // If it's a plain object (offline)
+    const colleges = getOfflineData('colleges.json');
+    const clusters = getOfflineData('clusters.json');
+    const userCollege = colleges.find(c => c._id === user.collegeId || c.id === user.collegeId);
+    const userCluster = clusters.find(c => c._id === user.clusterId || c.id === user.clusterId);
+
+    const responseUser = { ...user };
+    responseUser.college = userCollege || null;
+    responseUser.cluster = userCluster || null;
+    delete responseUser.password;
+
+    res.json(responseUser);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+
 
 module.exports = router;
 

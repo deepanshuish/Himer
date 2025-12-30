@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
+import API_URL from '@/lib/api'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -19,7 +20,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/login`,
+        `${API_URL}/api/auth/login`,
         { email, password }
       )
 

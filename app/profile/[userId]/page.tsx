@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
+import API_URL from '@/lib/api'
 
 interface Reply {
   _id: string
@@ -54,7 +55,7 @@ export default function ProfilePage() {
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [replyText, setReplyText] = useState('')
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+  const apiBase = API_URL
 
   const getAuthHeaders = () => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
@@ -135,7 +136,7 @@ export default function ProfilePage() {
 
   const handleDeleteTweet = async (tweetId: string) => {
     if (!confirm('Delete this tweet?')) return
-    
+
     try {
       await axios.delete(
         `${apiBase}/api/users/tweet/${tweetId}`,
@@ -188,8 +189,8 @@ export default function ProfilePage() {
             <p className="text-lg font-bold text-gray-900 mb-2">Unable to Load Profile</p>
             <p className="text-sm text-gray-600">{error}</p>
           </div>
-          <Link 
-            href="/matches" 
+          <Link
+            href="/matches"
             className="inline-block px-6 py-3 bg-cyan-600 text-white rounded-xl hover:bg-cyan-700 transition-all font-medium text-sm"
           >
             Back to Dashboard
@@ -293,7 +294,7 @@ export default function ProfilePage() {
           <h2 className="text-lg font-bold text-gray-900">
             {isOwnProfile ? 'Your Updates' : 'Updates'}
           </h2>
-          
+
           {(!userProfile.tweets || userProfile.tweets.length === 0) ? (
             <div className="glass-effect rounded-xl p-12 text-center border border-cyan-100">
               <p className="text-gray-600 text-sm">No updates yet</p>
@@ -313,11 +314,10 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => handleLikeTweet(tweet._id)}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                        tweet.likes.includes(currentUserId || '')
-                          ? 'bg-red-100 text-red-600'
-                          : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
-                      }`}
+                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${tweet.likes.includes(currentUserId || '')
+                        ? 'bg-red-100 text-red-600'
+                        : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
+                        }`}
                     >
                       <svg className="w-4 h-4" fill={tweet.likes.includes(currentUserId || '') ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />

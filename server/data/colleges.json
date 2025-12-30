@@ -1,0 +1,3002 @@
+[
+  {
+    "_id": "eng_1",
+    "name": "Indian Institute of Technology Madras",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_2",
+    "name": "Indian Institute of Technology Delhi",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_3",
+    "name": "Indian Institute of Technology Bombay",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mumbai",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_4",
+    "name": "Indian Institute of Technology Kanpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kanpur",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_5",
+    "name": "Indian Institute of Technology Kharagpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kharagpur",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_6",
+    "name": "Indian Institute of Technology Roorkee",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Roorkee",
+      "state": "Uttarakhand"
+    }
+  },
+  {
+    "_id": "eng_7",
+    "name": "Indian Institute of Technology Guwahati",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Guwahati",
+      "state": "Assam"
+    }
+  },
+  {
+    "_id": "eng_8",
+    "name": "Indian Institute of Technology Hyderabad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_9",
+    "name": "National Institute of Technology Tiruchirappalli",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Tiruchirappalli",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_10",
+    "name": "Indian Institute of Technology (Banaras Hindu University) Varanasi",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Varanasi",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_11",
+    "name": "Vellore Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Vellore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_12",
+    "name": "Jadavpur University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kolkata",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_13",
+    "name": "S.R.M. Institute of Science and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_14",
+    "name": "Anna University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_15",
+    "name": "Indian Institute of Technology (Indian School of Mines) Dhanbad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dhanbad",
+      "state": "Jharkhand"
+    }
+  },
+  {
+    "_id": "eng_16",
+    "name": "Indian Institute of Technology Indore",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Indore",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "eng_17",
+    "name": "National Institute of Technology Karnataka, Surathkal",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Surathkal",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_18",
+    "name": "Indian Institute of Technology Gandhinagar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gandhinagar",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "eng_19",
+    "name": "National Institute of Technology Rourkela",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Rourkela",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_20",
+    "name": "Birla Institute of Technology and Science, Pilani",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pilani",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_21",
+    "name": "National Institute of Technology Warangal",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Warangal",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_22",
+    "name": "Indian Institute of Technology Ropar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Rupnagar",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_23",
+    "name": "Amrita Vishwa Vidyapeetham",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_24",
+    "name": "Jamia Millia Islamia",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_25",
+    "name": "National Institute of Technology Calicut",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kozhikode",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "eng_26",
+    "name": "Siksha `O` Anusandhan",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_27",
+    "name": "Delhi Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_28",
+    "name": "Indian Institute of Technology Jodhpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jodhpur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_29",
+    "name": "Thapar Institute of Engineering and Technology (Deemed-to-be-university)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Patiala",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_30",
+    "name": "Amity University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gautam Budh Nagar",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_31",
+    "name": "Indian Institute of Technology Mandi",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mandi",
+      "state": "Himachal Pradesh"
+    }
+  },
+  {
+    "_id": "eng_32",
+    "name": "Chandigarh University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mohali",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_33",
+    "name": "Aligarh Muslim University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Aligarh",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_34",
+    "name": "Indian Institute of Technology Patna",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Patna",
+      "state": "Bihar"
+    }
+  },
+  {
+    "_id": "eng_35",
+    "name": "Koneru Lakshmaiah Education Foundation University (K L College of Engineering)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Vaddeswaram",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_36",
+    "name": "Kalasalingam Academy of Research and Education",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Srivilliputhur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_37",
+    "name": "Kalinga Institute of Industrial Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_38",
+    "name": "Shanmugha Arts Science Technology and Research Academy",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thanjavur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_39",
+    "name": "Visvesvaraya National Institute of Technology Nagpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Nagpur",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_40",
+    "name": "National Institute of Technology Silchar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Silchar",
+      "state": "Assam"
+    }
+  },
+  {
+    "_id": "eng_41",
+    "name": "Institute of Chemical Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mumbai",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_42",
+    "name": "UPES",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dehradun",
+      "state": "Uttarakhand"
+    }
+  },
+  {
+    "_id": "eng_43",
+    "name": "Malaviya National Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jaipur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_44",
+    "name": "National Institute of Technology Durgapur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Durgapur",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_45",
+    "name": "National Institute of Technology Delhi",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_46",
+    "name": "Sri Sivasubramaniya Nadar College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kalavakkam",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_47",
+    "name": "International Institute of Information Technology Hyderabad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_48",
+    "name": "Birla Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ranchi",
+      "state": "Jharkhand"
+    }
+  },
+  {
+    "_id": "eng_49",
+    "name": "Indian Institute of Engineering Science and Technology, Shibpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Howrah",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_50",
+    "name": "Lovely Professional University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Phagwara",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_51",
+    "name": "Indian Institute of Space Science and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvananthapuram",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "eng_52",
+    "name": "Graphic Era University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dehradun",
+      "state": "Uttarakhand"
+    }
+  },
+  {
+    "_id": "eng_53",
+    "name": "Saveetha Institute of Medical and Technical Sciences",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_54",
+    "name": "Indian Institute of Technology Bhubaneswar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_55",
+    "name": "National Institute of Technology Patna",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Patna",
+      "state": "Bihar"
+    }
+  },
+  {
+    "_id": "eng_56",
+    "name": "Manipal Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Manipal",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_57",
+    "name": "Netaji Subhas University of Technology (NSUT)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_58",
+    "name": "Dr. B R Ambedkar National Institute of Technology Jalandhar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jalandhar",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_59",
+    "name": "Sardar Vallabhbhai National Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "SURAT",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "eng_60",
+    "name": "Motilal Nehru National Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Prayagraj",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_61",
+    "name": "Indian Institute of Technology Tirupati",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "YERPEDU",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_62",
+    "name": "Indian Institute of Technology Jammu",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jammu",
+      "state": "Jammu and Kashmir"
+    }
+  },
+  {
+    "_id": "eng_63",
+    "name": "Defence Institute of Advanced Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_64",
+    "name": "Indian Institute of Technology Palakkad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Palakkad",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "eng_64",
+    "name": "Manipal University, Jaipur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jaipur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_66",
+    "name": "Sathyabama Institute of Science and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_67",
+    "name": "PSG College of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_68",
+    "name": "National Institute of Technology Meghalaya",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Shillong",
+      "state": "Meghalaya"
+    }
+  },
+  {
+    "_id": "eng_69",
+    "name": "Visvesvaraya Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Belgaum",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_70",
+    "name": "University of Hyderabad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_71",
+    "name": "National Institute of Technology Raipur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Raipur",
+      "state": "Chhattisgarh"
+    }
+  },
+  {
+    "_id": "eng_72",
+    "name": "Maulana Azad National Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhopal",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "eng_73",
+    "name": "Indian Institute of Technology Bhilai",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Raipur",
+      "state": "Chhattisgarh"
+    }
+  },
+  {
+    "_id": "eng_74",
+    "name": "International Institute of Information Technology Bangalore",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_75",
+    "name": "M. S. Ramaiah Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_76",
+    "name": "Sant Longowal Institute of Engineering and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Longowal",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_77",
+    "name": "COEP Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_78",
+    "name": "Banasthali Vidyapith",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Banasthali",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_79",
+    "name": "National Institute of Technology Srinagar",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Srinagar",
+      "state": "Jammu and Kashmir"
+    }
+  },
+  {
+    "_id": "eng_80",
+    "name": "Rajiv Gandhi Institute of Petroleum Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Amethi",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_81",
+    "name": "National Institute of Technology Kurukshetra",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kurukshetra",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_82",
+    "name": "National Institute of Technology Agartala",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Agratala",
+      "state": "Tripura"
+    }
+  },
+  {
+    "_id": "eng_83",
+    "name": "Sri Krishna College of Engineering and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_84",
+    "name": "Madan Mohan Malaviya University of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gorakhpur",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_85",
+    "name": "Indraprastha Institute of Information Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_86",
+    "name": "Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_87",
+    "name": "Indian Institute of Information Technology Allahabad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Prayagraj",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_88",
+    "name": "Jawaharlal Nehru Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_89",
+    "name": "Guru Gobind Singh Indraprastha University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_90",
+    "name": "AU College of Engineering (A)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Visakhapatnam",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_91",
+    "name": "Vignan's Foundation for Science, Technology and Research",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Guntur",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_92",
+    "name": "Shoolini University of Biotechnology and Management Sciences",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Solan",
+      "state": "Himachal Pradesh"
+    }
+  },
+  {
+    "_id": "eng_93",
+    "name": "Christ University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_94",
+    "name": "Chitkara University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Rajpura",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_95",
+    "name": "Jain University, Bangalore",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_96",
+    "name": "C.V. Raman Global University, Odisha",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_97",
+    "name": "National Institute of Technology Puducherry",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Karaikal",
+      "state": "Pondicherry"
+    }
+  },
+  {
+    "_id": "eng_98",
+    "name": "SR University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Warangal",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_99",
+    "name": "R.V. College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_100",
+    "name": "Siddaganga Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Tumkur",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_101",
+    "name": "Amity University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "North Twenty Four Parganas",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_102",
+    "name": "Amity University Haryana, Gurgaon",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gurugram, Haryana",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_103",
+    "name": "Amity University Rajasthan,Jaipur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jaipur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "eng_104",
+    "name": "Atal Bihari Vajpayee Indian Institute of Information Technology and Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gwalior",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "eng_105",
+    "name": "Chandigarh Engineering College-CGC, Landran, Mohali",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mohali",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "eng_106",
+    "name": "Chennai Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_107",
+    "name": "Coimbatore Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_108",
+    "name": "College of Engineering, Trivandrum",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvananthapuram",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "eng_109",
+    "name": "Dr. Vishwanath Karad MIT World Peace University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_110",
+    "name": "Galgotias University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gautam Budh Nagar",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_111",
+    "name": "Gandhi Institute of Technology and Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Visakhapatnam",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_112",
+    "name": "Goka Raju Ranga Raju Institute of Engineering & Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_113",
+    "name": "Hindustan Institute of Technology and Science (HITS)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_114",
+    "name": "Indian Institute of Information Technology, Design & Manufacturing, Kancheepuram",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_115",
+    "name": "Indian Institute of Technology Dharwad",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dharwad",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_116",
+    "name": "Jawaharlal Nehru Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kakinada",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_117",
+    "name": "Jaypee Institute of Information Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Noida",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_118",
+    "name": "Karunya Institute of Technology and Sciences",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_119",
+    "name": "Kongu Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Perundurai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_120",
+    "name": "KPR Institute of Engineering and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_121",
+    "name": "Mahindra University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_122",
+    "name": "Manav Rachna International Institute of Research and Studies",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Faridabad",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_123",
+    "name": "Maulana Abul Kalam Azad University of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Nadia",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_124",
+    "name": "Mepco Schlenk Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Sivakasi",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_125",
+    "name": "National Institute of Food Technology, Entrepreneurship and Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thanjavur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_126",
+    "name": "National Institute of Technology Arunachal Pradesh",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Itanagar",
+      "state": "Arunachal Pradesh"
+    }
+  },
+  {
+    "_id": "eng_127",
+    "name": "National Institute of Technology Goa",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ponda",
+      "state": "Goa"
+    }
+  },
+  {
+    "_id": "eng_128",
+    "name": "National Institute of Technology Hamirpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hamirpur",
+      "state": "Himachal Pradesh"
+    }
+  },
+  {
+    "_id": "eng_129",
+    "name": "National Institute of Technology Manipur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Imphal",
+      "state": "Manipur"
+    }
+  },
+  {
+    "_id": "eng_130",
+    "name": "National Institute of Technology Mizoram",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Aizawl",
+      "state": "Mizoram"
+    }
+  },
+  {
+    "_id": "eng_131",
+    "name": "National Institute of Technology Uttarakhand",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Srinagar (Garhwal)",
+      "state": "Uttarakhand"
+    }
+  },
+  {
+    "_id": "eng_132",
+    "name": "National Institute of Technology, Jamshedpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jamshedpur",
+      "state": "Jharkhand"
+    }
+  },
+  {
+    "_id": "eng_133",
+    "name": "Nirma University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ahmedabad",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "eng_134",
+    "name": "Nitte Meenakshi Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_135",
+    "name": "Noida Institute of Engineering & Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_136",
+    "name": "Pandit Deendayal Energy University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gandhinagar",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "eng_137",
+    "name": "Pandit Dwarka Prasad Mishra Indian Institute of Information Technology, Design and Manufacturing (IIITDM) Jabalpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Jabalpur",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "eng_138",
+    "name": "Panjab University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chandigarh",
+      "state": "Chandigarh"
+    }
+  },
+  {
+    "_id": "eng_139",
+    "name": "PES University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_140",
+    "name": "PSG Institute of Technology and Applied Research",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_141",
+    "name": "Punjab Engineering College (Deemed to be University), Chandigarh",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chandigarh",
+      "state": "Chandigarh"
+    }
+  },
+  {
+    "_id": "eng_142",
+    "name": "Rajalakshmi Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_143",
+    "name": "Sharda University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_144",
+    "name": "Sri Sairam Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kancheepuram",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_145",
+    "name": "SVKM`s Narsee Monjee Institute of Management Studies",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mumbai",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_146",
+    "name": "The Northcap University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Gurugram",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_147",
+    "name": "Thiagarajar College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Madurai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_148",
+    "name": "University College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_149",
+    "name": "Veermata Jijabai Technological Institute, (VJTI, Mumbai)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mumbai",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_150",
+    "name": "Vels Institute of Science Technology and Advanced Studies (VISTAS)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_151",
+    "name": "Annamalai University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Annamalainagar",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_152",
+    "name": "Anurag University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_153",
+    "name": "B. S. Abdur Rahman Crescent Institute of Science and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_154",
+    "name": "B.M.S. College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_155",
+    "name": "Bansilal Ramnath Agarwal Charitable Trust`s Vishwakarama Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_156",
+    "name": "Bharati Vidyapeeth Deemed University College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_157",
+    "name": "C M R Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_158",
+    "name": "Chaitanya Bharathi Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_159",
+    "name": "CVR College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ibrahimpatan",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_160",
+    "name": "Dayalbagh Educational Institute",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Agra",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_161",
+    "name": "Dr. D. Y. Patil Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_162",
+    "name": "Easwari Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_163",
+    "name": "G. H. Raisoni College of Engineering, Nagpur",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Nagpur",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_164",
+    "name": "G. L. A. University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mathura",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_165",
+    "name": "G.L.Bajaj Institute of Technology and Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_166",
+    "name": "Indian Institute of Information Technology Guwahati",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Guwahati",
+      "state": "Assam"
+    }
+  },
+  {
+    "_id": "eng_167",
+    "name": "Indira Gandhi Delhi Technical University for Women",
+    "category": "engineering",
+    "genderType": "girls",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "eng_168",
+    "name": "Institute of Aeronautical Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_169",
+    "name": "Institute of Engineering & Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kolkata",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "eng_170",
+    "name": "J. C. Bose University of Science and Technology, YMCA",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Faridabad",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_171",
+    "name": "Jawaharlal Nehru Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ananthapuramu",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_172",
+    "name": "JSPM's Rajarshi Shahu College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "eng_173",
+    "name": "KIET Group of Institutions: KIET Group of Pharmacy",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ghaziabad",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "eng_174",
+    "name": "KLE Technological University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dharwad",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_175",
+    "name": "Kumaraguru College of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_176",
+    "name": "Maharishi Markandeshwar (Deemed to be University)",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ambala",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_177",
+    "name": "Maulana Azad National Urdu University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_178",
+    "name": "National Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Kovilpatti",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_179",
+    "name": "National Institute of Advanced Manufacturing Technology, Ranchi",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Ranchi",
+      "state": "Jharkhand"
+    }
+  },
+  {
+    "_id": "eng_180",
+    "name": "National Institute of Food Technology, Enterprenurship and Management",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Sonipat",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "eng_181",
+    "name": "National Institute of Technology Nagaland",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Dimapur",
+      "state": "Nagaland"
+    }
+  },
+  {
+    "_id": "eng_182",
+    "name": "National Institute of Technology Sikkim",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "South Sikkim",
+      "state": "Sikkim"
+    }
+  },
+  {
+    "_id": "eng_183",
+    "name": "New Horizon College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_184",
+    "name": "NMAM Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Nitte, Udupi",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_185",
+    "name": "North Eastern Regional Institute of Science & Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Itanagar",
+      "state": "Arunachal Pradesh"
+    }
+  },
+  {
+    "_id": "eng_186",
+    "name": "R.M.K. Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvallur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_187",
+    "name": "Rajalakshmi Institute of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvallur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_188",
+    "name": "Shri Mata Vaishno Devi University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Katra",
+      "state": "Jammu and Kashmir"
+    }
+  },
+  {
+    "_id": "eng_189",
+    "name": "Sona College of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "SALEM",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_190",
+    "name": "Sri Krishna College of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_191",
+    "name": "Sri Ramakrishna Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_192",
+    "name": "Sri Venkateswara College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Sriperumbudur",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "eng_193",
+    "name": "Tezpur University",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Tezpur",
+      "state": "Assam"
+    }
+  },
+  {
+    "_id": "eng_194",
+    "name": "The National Institute of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Mysuru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "eng_195",
+    "name": "Vallurupalli Nageswara Rao Vignana Jyothi Institute of Engineering and Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_196",
+    "name": "Vardhaman College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Rangareddy",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_197",
+    "name": "Veer Surendra Sai University of Technology",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Burla",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "eng_198",
+    "name": "Velagapudi Ramakrishna Siddhartha Engineering College",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "VIJAYAWADA",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "eng_199",
+    "name": "Vignan Institute of Technology and Science",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Yadadri-Bhuvangiri",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "eng_200",
+    "name": "Yeshwantrao Chavan College of Engineering",
+    "category": "engineering",
+    "genderType": "coed",
+    "location": {
+      "city": "Nagpur",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_1",
+    "name": "All India Institute of Medical Sciences Delhi",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_2",
+    "name": "Post Graduate Institute of Medical Education and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chandigarh",
+      "state": "Chandigarh"
+    }
+  },
+  {
+    "_id": "med_3",
+    "name": "Christian Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Vellore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_4",
+    "name": "National Institute of Mental Health and Neuro Sciences, Bangalore",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_5",
+    "name": "Jawaharlal Institute of Post Graduate Medical Education and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Puducherry",
+      "state": "Pondicherry"
+    }
+  },
+  {
+    "_id": "med_6",
+    "name": "Sanjay Gandhi Postgraduate Institute of Medical Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Lucknow",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_7",
+    "name": "Banaras Hindu University",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Varanasi",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_8",
+    "name": "Amrita Vishwa Vidyapeetham",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_9",
+    "name": "Kasturba Medical College, Manipal",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Manipal",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_10",
+    "name": "Madras Medical College and Government General Hospital, Chennai",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_11",
+    "name": "Dr. D. Y. Patil Vidyapeeth",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_12",
+    "name": "Saveetha Institute of Medical and Technical Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_13",
+    "name": "Sree Chitra Tirunal Institute for Medical Sciences and Technology, Thiruvananthapuram",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvananthapuram",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "med_14",
+    "name": "All India Institute of Medical Sciences Rishikesh",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Rishikesh",
+      "state": "Uttarakhand"
+    }
+  },
+  {
+    "_id": "med_15",
+    "name": "All India Institute of Medical Sciences Bhubaneswar",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Khordha",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "med_16",
+    "name": "All India Institute of Medical Sciences Jodhpur",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Jodhpur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "med_17",
+    "name": "Vardhman Mahavir Medical College & Safdarjung Hospital",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_18",
+    "name": "S.R.M. Institute of Science and Technology",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_19",
+    "name": "King George`s Medical University",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Lucknow",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_20",
+    "name": "Sri Ramachandra Institute of Higher Education and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_21",
+    "name": "Siksha `O` Anusandhan",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "med_22",
+    "name": "Institute of Post Graduate Medical Education and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Kolkata",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "med_23",
+    "name": "Datta Meghe Institute of Higher Education and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Wardha",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_24",
+    "name": "Maulana Azad Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_25",
+    "name": "Kalinga Institute of Industrial Technology",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhubaneswar",
+      "state": "Odisha"
+    }
+  },
+  {
+    "_id": "med_26",
+    "name": "All India Institute of Medical Sciences Patna",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Patna",
+      "state": "Bihar"
+    }
+  },
+  {
+    "_id": "med_27",
+    "name": "Aligarh Muslim University",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Aligarh",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_28",
+    "name": "St. John's Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_29",
+    "name": "Lady Hardinge Medical College",
+    "category": "medical",
+    "genderType": "girls",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_30",
+    "name": "Armed Force Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_31",
+    "name": "All India Institute of Medical Sciences Bhopal",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhopal",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "med_32",
+    "name": "University College of Medical Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_33",
+    "name": "Kasturba Medical College, Mangalore",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Mangaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_34",
+    "name": "Institute of Liver and Biliary Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_35",
+    "name": "Govt. Medical College & Hospital",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chandigarh",
+      "state": "Chandigarh"
+    }
+  },
+  {
+    "_id": "med_35",
+    "name": "Maharishi Markandeshwar (Deemed to be University)",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Ambala",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "med_37",
+    "name": "Jamia Hamdard",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "New Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_38",
+    "name": "All India Institute of Medical Sciences Raipur",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Raipur",
+      "state": "Chhattisgarh"
+    }
+  },
+  {
+    "_id": "med_39",
+    "name": "JSS Medical College, Mysore",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Mysuru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_40",
+    "name": "Dayanand Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Ludhiana",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "med_41",
+    "name": "PSG Institute of Medical Sciences and Research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_42",
+    "name": "Government Medical College, Thiruvananthapuram",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvananthapuram",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "med_43",
+    "name": "Sawai Man Singh Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Jaipur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "med_44",
+    "name": "Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Kolkata",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "med_45",
+    "name": "Gujarat Cancer and Research Institute",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Ahmadabad",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_46",
+    "name": "M. S. Ramaiah Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_47",
+    "name": "Mahatma Gandhi Medical College and Research Institute",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Puducherry",
+      "state": "Pondicherry"
+    }
+  },
+  {
+    "_id": "med_48",
+    "name": "Osmania Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "HYDERABAD",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "med_49",
+    "name": "Christian Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Ludhiana",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "med_50",
+    "name": "Pandit Bhagwat Dayal Sharma University of Health Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Rohtak",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "med_51",
+    "name": "Adichunchanagiri Institute of Medical Science",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Nagamangala",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_52",
+    "name": "All India Institute of Medical Sciences (AIIMS), Nagpur",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Nagpur",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_53",
+    "name": "AMALA INSTITUTE OF MEDICAL SCIENCES, THRISSUR",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Thrissur",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "med_54",
+    "name": "Anand Homoeopathic Medical College & Research Institute, Anand",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Anand",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_55",
+    "name": "Apollo Institute of Medical Sciences and Research, Hyderabad",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Hyderabad",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "med_56",
+    "name": "B. J. Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Ahmadabad",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_57",
+    "name": "B. P. S. Government Medical College for Women",
+    "category": "medical",
+    "genderType": "girls",
+    "location": {
+      "city": "Sonipat",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "med_58",
+    "name": "Believers Church Medical College Hospital",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Thiruvalla",
+      "state": "Kerala"
+    }
+  },
+  {
+    "_id": "med_59",
+    "name": "BGS Global Institute of Medical Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_60",
+    "name": "Bharati Vidyapeeth (Deemed to be University) Medical College, Pune",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Pune",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_61",
+    "name": "Bharati Vidyapeeth Deemed University Medical College & Hospital Sangli",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Sangli",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_62",
+    "name": "BVV SanghaG??s S. Nijalingappa Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bagalkot",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_63",
+    "name": "Chalmeda Ananda Rao Institute of Medical Sciences, Karimnagar",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Karimnagar",
+      "state": "Telangana"
+    }
+  },
+  {
+    "_id": "med_64",
+    "name": "Chettinad Academy of Research and Education",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Kelambakkam, Chengalpattu District",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_65",
+    "name": "CHIRAYU MEDICAL COLLEGE AND HOSPITAL",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "BHOPAL",
+      "state": "Madhya Pradesh"
+    }
+  },
+  {
+    "_id": "med_66",
+    "name": "Coimbatore Medical College (Inst. Code ? 007), Coimbatore",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Coimbatore",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_67",
+    "name": "D. Y. Patil Educational Society",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Kolhapur",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_68",
+    "name": "Desh Bhagat University",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Mandi Gobindgarh",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "med_69",
+    "name": "DHANALAKSHMI SRINIVASAN MEDICAL COLLEGE AND HOSPITAL (Inst. Code - 455), PERAMBALUR",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "PERAMBALUR",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_70",
+    "name": "DR RAM MANOHAR LOHIA INSTITUTE OF MEDICAL SCIENCES, VIBHUTI KHAND, GOMTI NAGAR, LUCKNOW",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Lucknow",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_71",
+    "name": "Dr Sarvepalli Radhakrishnan Rajasthan Ayurved University, Jodhpur",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Jodhpur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "med_72",
+    "name": "Dr. M. G. R. Educational and Research Institute",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_73",
+    "name": "Dr. Punjabrao Deshmukh Memorial Medical College, Amravati",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Amravati",
+      "state": "Maharashtra"
+    }
+  },
+  {
+    "_id": "med_74",
+    "name": "Dr. Ram Manohar Lohia Hospital (PGIMER)",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Delhi",
+      "state": "Delhi"
+    }
+  },
+  {
+    "_id": "med_75",
+    "name": "Dr. S. N. Medical College and Hospital",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Jodhpur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "med_76",
+    "name": "E S COLLEGE OF NURSING (Inst. Code - 307), VILLUPURAM",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Villupuram",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_77",
+    "name": "E S I, Joka",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "KOLKATA - 700104",
+      "state": "West Bengal"
+    }
+  },
+  {
+    "_id": "med_78",
+    "name": "Era's Lucknow Medical College & Hospital, Lucknow",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Lucknow",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_79",
+    "name": "ESI MEDICAL COLLEGE & ESI-PGIMSR (Inst. Code - 495), CHENNAI",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_80",
+    "name": "ESIC Medical College & Post Graduate Institute of Medical Scinece and research",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bengaluru",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_81",
+    "name": "ESIC MEDICAL COLLEGE AND HOSPITAL",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Faridabad",
+      "state": "Haryana"
+    }
+  },
+  {
+    "_id": "med_82",
+    "name": "Fr. Muller Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Mangalore",
+      "state": "Karnataka"
+    }
+  },
+  {
+    "_id": "med_83",
+    "name": "G.S.V.M. Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Kanpur Nagar",
+      "state": "Uttar Pradesh"
+    }
+  },
+  {
+    "_id": "med_84",
+    "name": "Gandhi Institute of Technology and Management",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Visakhapatnam",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "med_85",
+    "name": "Gauhati Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Guwahati",
+      "state": "Assam"
+    }
+  },
+  {
+    "_id": "med_86",
+    "name": "GEETANJALI UNIVERSITY",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Udaipur",
+      "state": "Rajasthan"
+    }
+  },
+  {
+    "_id": "med_87",
+    "name": "GEMS Medical College, Srikakulam",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Srikakulam",
+      "state": "Andhra Pradesh"
+    }
+  },
+  {
+    "_id": "med_88",
+    "name": "GMERS Medical College, Valsad",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Valsad",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_89",
+    "name": "Goa Medical College Bambolim",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "North Goa",
+      "state": "Goa"
+    }
+  },
+  {
+    "_id": "med_90",
+    "name": "Gopal Narayan Singh University",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Sasaram",
+      "state": "Bihar"
+    }
+  },
+  {
+    "_id": "med_91",
+    "name": "Government Chengalpattu Medical College & Hospital (Inst. Code - 006), Kancheepuram",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chengalpattu",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_92",
+    "name": "Government Kilpauk Medical College (Inst. Code ? 004), Chennai",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Chennai",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_93",
+    "name": "Government Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Surat",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_94",
+    "name": "Government Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhavnagar",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_95",
+    "name": "Government Medical College, Amritsar",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Amritsar",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "med_96",
+    "name": "Government Mohan Kumaramangalam Medical College (Inst. Code - 010), Salem",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Salem",
+      "state": "Tamil Nadu"
+    }
+  },
+  {
+    "_id": "med_97",
+    "name": "Govt. Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Patiala",
+      "state": "Punjab"
+    }
+  },
+  {
+    "_id": "med_98",
+    "name": "Govt. Medical College",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Jammu",
+      "state": "Jammu and Kashmir"
+    }
+  },
+  {
+    "_id": "med_99",
+    "name": "Gujarat Adani Institute of Medical Science",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Bhuj",
+      "state": "Gujarat"
+    }
+  },
+  {
+    "_id": "med_100",
+    "name": "Himalayan Institute of Medical Sciences",
+    "category": "medical",
+    "genderType": "coed",
+    "location": {
+      "city": "Dehradun",
+      "state": "Uttarakhand"
+    }
+  }
+]

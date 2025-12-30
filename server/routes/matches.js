@@ -1,55 +1,61 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const prisma = require('../utils/prisma');
 const { authenticate } = require('../middleware/auth');
 
-function objectIdEquals(a, b) {
-  return String(a) === String(b);
-}
-
-// Send follow request
+// Send follow request (Like)
 router.post('/like/:userId', authenticate, async (req, res) => {
   try {
     const { userId } = req.params;
-    const currentUser = await User.findById(req.user._id);
-    const targetUser = await User.findById(userId);
+    const currentUserId = req.user.id || req.user._id;
 
-    if (!targetUser) {
-      return res.status(404).json({ message: 'User not found' });
+    if (currentUserId === userId) return res.status(400).json({ message: "You can't like yourself" });
+
+    try {
+      // Check if already matched
+      const existingMatch = await prisma.match.findUnique({
+        where: { userId_matchedId: { userId: currentUserId, matchedId: userId } }
+      });
+      if (existingMatch) return res.status(400).json({ message: 'You are already connected.' });
+
+      // Create like/request
+      await prisma.like.upsert({
+        where: { fromUserId_toUserId: { fromUserId: currentUserId, toUserId: userId } },
+        update: {},
+        create: { fromUserId: currentUserId, toUserId: userId }
+      });
+
+      // Optional: Auto-match if recipient already liked sender
+      const backLike = await prisma.like.findUnique({
+        where: { fromUserId_toUserId: { fromUserId: userId, toUserId: currentUserId } }
+      });
+
+      if (backLike) {
+        // Create mutual matches
+        await prisma.match.createMany({
+          data: [
+            { userId: currentUserId, matchedId: userId },
+            { userId: userId, matchedId: currentUserId }
+          ],
+          skipDuplicates: true
+        });
+        // Delete likes as they are now matches
+        await prisma.like.deleteMany({
+          where: {
+            OR: [
+              { fromUserId: currentUserId, toUserId: userId },
+              { fromUserId: userId, toUserId: currentUserId }
+            ]
+          }
+        });
+      }
+
+      res.json({ message: backLike ? 'It is a match!' : 'Follow request sent' });
+    } catch (dbError) {
+      console.warn('Prisma like error:', dbError.message);
+      res.status(503).json({ message: 'Database error' });
     }
-
-    // Already matched?
-    const alreadyMatched = (currentUser.matches || []).some(
-      (m) => objectIdEquals(m.user, userId) && m.status === 'matched'
-    );
-    if (alreadyMatched) {
-      return res.status(400).json({ message: 'You are already connected.' });
-    }
-
-    // Already sent?
-    const alreadySent = (currentUser.followRequestsSent || []).some((id) => objectIdEquals(id, userId));
-    if (alreadySent) {
-      return res.status(400).json({ message: 'Follow request already sent' });
-    }
-
-    // Record sent + received request
-    currentUser.followRequestsSent = currentUser.followRequestsSent || [];
-    currentUser.followRequestsSent.push(targetUser._id);
-
-    targetUser.followRequestsReceived = targetUser.followRequestsReceived || [];
-    const alreadyReceived = targetUser.followRequestsReceived.some((r) => objectIdEquals(r.user, currentUser._id));
-    if (!alreadyReceived) {
-      targetUser.followRequestsReceived.push({ user: currentUser._id, sentAt: new Date() });
-    }
-
-    await currentUser.save();
-    await targetUser.save();
-
-    res.json({
-      message: 'Follow request sent',
-    });
   } catch (error) {
-    console.error('Follow request error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -57,66 +63,69 @@ router.post('/like/:userId', authenticate, async (req, res) => {
 // Get follow requests received
 router.get('/requests', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .populate({
-        path: 'followRequestsReceived.user',
-        select: '-password',
-        populate: { path: 'college', select: 'name' },
-      })
-      .select('-password');
+    const userId = req.user.id || req.user._id;
+    try {
+      const requests = await prisma.like.findMany({
+        where: { toUserId: userId },
+        include: {
+          fromUser: {
+            include: { college: true }
+          }
+        }
+      });
 
-    const requests = (user.followRequestsReceived || []).map((r) => ({
-      id: r.user?._id,
-      firstName: r.user?.firstName,
-      lastName: r.user?.lastName,
-      college: r.user?.college?.name,
-      profile: r.user?.profile,
-      sentAt: r.sentAt,
-    })).filter((r) => r.id);
+      const formatted = requests.map(r => ({
+        id: r.fromUser.id,
+        _id: r.fromUser.id,
+        firstName: r.fromUser.firstName,
+        lastName: r.fromUser.lastName,
+        college: r.fromUser.college?.name,
+        profile: r.fromUser.profile ? JSON.parse(r.fromUser.profile) : {},
+        sentAt: r.createdAt
+      }));
 
-    res.json(requests);
+      res.json(formatted);
+    } catch (e) {
+      res.json([]);
+    }
   } catch (error) {
-    console.error('Get requests error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-// Accept follow request -> becomes a match (appears in Inbox/Chat)
+// Accept follow request
 router.post('/accept/:userId', authenticate, async (req, res) => {
   try {
     const { userId } = req.params;
-    const currentUser = await User.findById(req.user._id);
-    const sender = await User.findById(userId);
+    const currentUserId = req.user.id || req.user._id;
 
-    if (!sender) return res.status(404).json({ message: 'User not found' });
+    try {
+      // Check for pending request
+      const like = await prisma.like.findUnique({
+        where: { fromUserId_toUserId: { fromUserId: userId, toUserId: currentUserId } }
+      });
+      if (!like) return res.status(400).json({ message: 'No pending request' });
 
-    // Ensure there is a pending request
-    const hadRequest = (currentUser.followRequestsReceived || []).some((r) => objectIdEquals(r.user, userId));
-    if (!hadRequest) {
-      return res.status(400).json({ message: 'No pending request from this user.' });
+      // Create mutual match
+      await prisma.match.createMany({
+        data: [
+          { userId: currentUserId, matchedId: userId },
+          { userId: userId, matchedId: currentUserId }
+        ],
+        skipDuplicates: true
+      });
+
+      // Cleanup like
+      await prisma.like.delete({
+        where: { id: like.id }
+      });
+
+      res.json({ message: 'Request accepted', userId });
+    } catch (e) {
+      res.status(503).json({ message: 'Database error' });
     }
-
-    // Remove from received + sent
-    currentUser.followRequestsReceived = (currentUser.followRequestsReceived || []).filter((r) => !objectIdEquals(r.user, userId));
-    sender.followRequestsSent = (sender.followRequestsSent || []).filter((id) => !objectIdEquals(id, currentUser._id));
-
-    // Add match for both (dedupe)
-    currentUser.matches = currentUser.matches || [];
-    sender.matches = sender.matches || [];
-
-    const alreadyMatchedCurrent = currentUser.matches.some((m) => objectIdEquals(m.user, userId) && m.status === 'matched');
-    const alreadyMatchedSender = sender.matches.some((m) => objectIdEquals(m.user, currentUser._id) && m.status === 'matched');
-
-    if (!alreadyMatchedCurrent) currentUser.matches.push({ user: sender._id, status: 'matched', matchedAt: new Date() });
-    if (!alreadyMatchedSender) sender.matches.push({ user: currentUser._id, status: 'matched', matchedAt: new Date() });
-
-    await currentUser.save();
-    await sender.save();
-
-    res.json({ message: 'Request accepted', userId: sender._id });
   } catch (error) {
-    console.error('Accept request error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
@@ -124,21 +133,17 @@ router.post('/accept/:userId', authenticate, async (req, res) => {
 router.post('/reject/:userId', authenticate, async (req, res) => {
   try {
     const { userId } = req.params;
-    const currentUser = await User.findById(req.user._id);
-    const sender = await User.findById(userId);
-
-    if (!sender) return res.status(404).json({ message: 'User not found' });
-
-    currentUser.followRequestsReceived = (currentUser.followRequestsReceived || []).filter((r) => !objectIdEquals(r.user, userId));
-    sender.followRequestsSent = (sender.followRequestsSent || []).filter((id) => !objectIdEquals(id, currentUser._id));
-
-    await currentUser.save();
-    await sender.save();
-
-    res.json({ message: 'Request rejected' });
+    const currentUserId = req.user.id || req.user._id;
+    try {
+      await prisma.like.deleteMany({
+        where: { fromUserId: userId, toUserId: currentUserId }
+      });
+      res.json({ message: 'Request rejected' });
+    } catch (e) {
+      res.status(503).json({ message: 'Database error' });
+    }
   } catch (error) {
-    console.error('Reject request error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
@@ -146,51 +151,57 @@ router.post('/reject/:userId', authenticate, async (req, res) => {
 router.post('/pass/:userId', authenticate, async (req, res) => {
   try {
     const { userId } = req.params;
-    const currentUser = await User.findById(req.user._id);
-
-    if (currentUser.passed.includes(userId)) {
-      return res.status(400).json({ message: 'Already passed on this user' });
+    const currentUserId = req.user.id || req.user._id;
+    try {
+      await prisma.passed.upsert({
+        where: { userId_passedId: { userId: currentUserId, passedId: userId } },
+        update: {},
+        create: { userId: currentUserId, passedId: userId }
+      });
+      res.json({ message: 'Passed on user' });
+    } catch (e) {
+      res.status(503).json({ message: 'Database error' });
     }
-
-    currentUser.passed.push(userId);
-    await currentUser.save();
-
-    res.json({ message: 'Passed on user' });
   } catch (error) {
-    console.error('Pass error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
 // Get all matches
 router.get('/', authenticate, async (req, res) => {
   try {
-    const user = await User.findById(req.user._id)
-      .populate({
-        path: 'matches.user',
-        select: '-password',
-        populate: {
-          path: 'college',
-          select: 'name',
-        },
+    const userId = req.user.id || req.user._id;
+    try {
+      const matchRecords = await prisma.match.findMany({
+        where: { userId: userId },
+        include: {
+          matchedUser: {
+            include: { college: true }
+          }
+        }
       });
 
-    const matches = user.matches
-      .filter(m => m.status === 'matched')
-      .map(m => ({
-        id: m.user._id,
-        firstName: m.user.firstName,
-        lastName: m.user.lastName,
-        email: m.user.email,
-        college: m.user.college?.name,
-        profile: m.user.profile,
-        matchedAt: m.matchedAt,
-      }));
+      const formatted = matchRecords.map(m => {
+        const u = m.matchedUser;
+        return {
+          id: u.id,
+          _id: u.id,
+          firstName: u.firstName,
+          lastName: u.lastName,
+          email: u.email,
+          college: u.college?.name,
+          profile: u.profile ? JSON.parse(u.profile) : {},
+          matchedAt: m.createdAt
+        };
+      });
 
-    res.json(matches);
+      res.json(formatted);
+    } catch (e) {
+      console.warn('Get matches error:', e.message);
+      res.json([]);
+    }
   } catch (error) {
-    console.error('Get matches error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

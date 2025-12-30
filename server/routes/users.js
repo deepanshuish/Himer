@@ -1,426 +1,311 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
+const prisma = require('../utils/prisma');
 const { authenticate } = require('../middleware/auth');
+const fs = require('fs');
+const path = require('path');
 
-// Get user profile by ID (for viewing other user's profiles)
+// Helper for offline data
+function getOfflineUsers() {
+  try {
+    const p = path.join(__dirname, '../data/users.json');
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch (e) { }
+  return [];
+}
+
+// Get user profile by ID
 router.get('/profile/:userId', authenticate, async (req, res) => {
   try {
-    const { userId } = req.params
-    const currentUserId = req.user._id.toString()
+    const { userId } = req.params;
+    const currentUserId = req.user.id || req.user._id;
 
-    console.log('Fetching profile for userId:', userId)
-    console.log('Current user ID:', currentUserId)
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+          college: { select: { name: true } },
+          tweets: {
+            orderBy: { createdAt: 'desc' },
+            include: {
+              user: { select: { firstName: true, lastName: true, profile: true } },
+              replies: {
+                include: {
+                  user: { select: { firstName: true, lastName: true, profile: true } }
+                }
+              }
+            }
+          },
+          matches: {
+            where: { matchedId: currentUserId }
+          }
+        }
+      });
 
-    // Find the user
-    const user = await User.findById(userId)
-      .populate('college', 'name')
-      .populate('tweets.replies.user', 'firstName lastName profile.photos')
-      .select('-password')
+      if (!user) return res.status(404).json({ message: 'User not found' });
 
-    if (!user) {
-      console.log('User not found:', userId)
-      return res.status(404).json({ message: 'User not found' })
-    }
+      // Check authorization
+      const isOwnProfile = userId === currentUserId;
+      const isMatched = user.matches.length > 0;
 
-    // Check if this is the user's own profile
-    const isOwnProfile = currentUserId === userId
-
-    if (!isOwnProfile) {
-      // Check if users are matched (have access to view profile)
-      const currentUser = await User.findById(currentUserId)
-      
-      const isMatch = currentUser.matches.some(
-        match => match.user.toString() === userId
-      )
-
-      // Only allow viewing if they are matched
-      if (!isMatch) {
-        return res.status(403).json({ message: 'Not authorized to view this profile' })
+      if (!isOwnProfile && !isMatched) {
+        return res.status(403).json({ message: 'Not authorized to view this profile' });
       }
+
+      // Format for frontend
+      const formattedUser = {
+        _id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        college: user.college,
+        profile: user.profile ? JSON.parse(user.profile) : {},
+        tweets: user.tweets.map(t => ({
+          ...t,
+          _id: t.id,
+          user: {
+            _id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            photo: (user.profile ? JSON.parse(user.profile).photos?.[0] : null)
+          },
+          replies: t.replies.map(r => ({
+            ...r,
+            _id: r.id,
+            user: {
+              ...r.user,
+              _id: r.userId,
+              profile: r.user.profile ? JSON.parse(r.user.profile) : {}
+            }
+          }))
+        }))
+      };
+
+      return res.json(formattedUser);
+    } catch (dbError) {
+      console.warn('Prisma get profile error:', dbError.message);
     }
 
-    // Return user profile with tweets (sort tweets by date, newest first)
-    const tweets = user.tweets || []
-    const sortedTweets = tweets.sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    )
+    // Offline Fallback
+    const users = getOfflineUsers();
+    const user = users.find(u => u.id === userId || u._id === userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
 
     res.json({
-      _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      college: user.college,
-      profile: user.profile || {},
-      tweets: sortedTweets
-    })
+      ...user,
+      _id: user.id || user._id,
+      profile: typeof user.profile === 'string' ? JSON.parse(user.profile) : (user.profile || {})
+    });
   } catch (error) {
-    console.error('Get profile error:', error)
-    res.status(500).json({ message: 'Server error', error: error.message })
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
-})
+});
 
 // Post a tweet
 router.post('/tweet', authenticate, async (req, res) => {
   try {
-    const { text } = req.body
-    const userId = req.user._id
+    const { text } = req.body;
+    const userId = req.user.id || req.user._id;
 
-    if (!text || text.trim().length === 0) {
-      return res.status(400).json({ message: 'Tweet text is required' })
+    if (!text || text.trim().length === 0) return res.status(400).json({ message: 'Tweet text is required' });
+
+    try {
+      const tweet = await prisma.tweet.create({
+        data: {
+          text: text.trim(),
+          userId: userId
+        }
+      });
+      return res.json({ message: 'Tweet posted successfully', tweet: { ...tweet, _id: tweet.id } });
+    } catch (dbError) {
+      console.warn('Prisma post tweet error:', dbError.message);
     }
 
-    if (text.length > 280) {
-      return res.status(400).json({ message: 'Tweet must be 280 characters or less' })
-    }
-
-    const user = await User.findById(userId)
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' })
-    }
-
-    // Add tweet to user's tweets array
-    if (!user.tweets) {
-      user.tweets = []
-    }
-
-    user.tweets.unshift({
-      text: text.trim(),
-      likes: [],
-      createdAt: new Date()
-    })
-
-    await user.save()
-
-    res.json({ message: 'Tweet posted successfully', tweet: user.tweets[0] })
+    res.status(503).json({ message: 'Database error or offline mode' });
   } catch (error) {
-    console.error('Post tweet error:', error)
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error' });
   }
-})
+});
 
-// Like/unlike a tweet
-router.post('/tweet/:tweetId/like', authenticate, async (req, res) => {
+// Get user profile (own profile)
+router.get('/profile', authenticate, async (req, res) => {
   try {
-    const { tweetId } = req.params
-    const userId = req.user._id.toString()
+    const userId = req.user.id || req.user._id;
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: { college: true, cluster: true }
+      });
+      if (user) {
+        const formatted = {
+          ...user,
+          _id: user.id,
+          profile: user.profile ? JSON.parse(user.profile) : {}
+        };
+        delete formatted.password;
+        return res.json(formatted);
+      }
+    } catch (e) { }
 
-    // Find the user who owns the tweet
-    const user = await User.findOne({ 'tweets._id': tweetId })
-    
-    if (!user) {
-      return res.status(404).json({ message: 'Tweet not found' })
-    }
-
-    const tweet = user.tweets.id(tweetId)
-    if (!tweet) {
-      return res.status(404).json({ message: 'Tweet not found' })
-    }
-
-    // Check if already liked
-    const likeIndex = tweet.likes.findIndex(id => id.toString() === userId)
-    
-    if (likeIndex > -1) {
-      // Unlike
-      tweet.likes.splice(likeIndex, 1)
-    } else {
-      // Like
-      tweet.likes.push(userId)
-    }
-
-    await user.save()
-
-    res.json({ message: 'Tweet updated', likes: tweet.likes.length })
+    const users = getOfflineUsers();
+    const user = users.find(u => u.id === userId || u._id === userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
   } catch (error) {
-    console.error('Like tweet error:', error)
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
-})
+});
 
-// Delete a tweet
-router.delete('/tweet/:tweetId', authenticate, async (req, res) => {
+// Update user profile
+router.put('/profile', authenticate, async (req, res) => {
   try {
-    const { tweetId } = req.params
-    const userId = req.user._id
+    const userId = req.user.id || req.user._id;
+    const updates = req.body;
 
-    const user = await User.findById(userId)
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' })
+    try {
+      // Need to handle profile specifically if it's nested in updates
+      if (updates.profile) {
+        updates.profile = JSON.stringify(updates.profile);
+      }
+
+      const user = await prisma.user.update({
+        where: { id: userId },
+        data: updates,
+        include: { college: true, cluster: true }
+      });
+
+      const formatted = {
+        ...user,
+        _id: user.id,
+        profile: user.profile ? JSON.parse(user.profile) : {}
+      };
+      delete formatted.password;
+      return res.json(formatted);
+    } catch (dbError) {
+      console.warn('Prisma update profile error:', dbError.message);
     }
 
-    const tweet = user.tweets.id(tweetId)
-    if (!tweet) {
-      return res.status(404).json({ message: 'Tweet not found' })
-    }
-
-    // Remove the tweet
-    tweet.remove()
-    await user.save()
-
-    res.json({ message: 'Tweet deleted successfully' })
+    res.status(503).json({ message: 'Database error' });
   } catch (error) {
-    console.error('Delete tweet error:', error)
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
-})
+});
 
-// Reply to a tweet
-router.post('/tweet/:tweetId/reply', authenticate, async (req, res) => {
+// Complete onboarding
+router.post('/onboarding', authenticate, async (req, res) => {
   try {
-    const { tweetId } = req.params
-    const { text } = req.body
-    const userId = req.user._id
+    const userId = req.user.id || req.user._id;
+    const { typeDescription, bio, age, datingIntentions, photos } = req.body;
 
-    if (!text || text.trim().length === 0) {
-      return res.status(400).json({ message: 'Reply text is required' })
+    if (!age) return res.status(400).json({ message: 'Age is required' });
+    if (!datingIntentions) return res.status(400).json({ message: 'Dating intentions are required' });
+    if (!photos || photos.length < 1) return res.status(400).json({ message: 'At least 1 photo required' });
+
+    const profile = {
+      age: Number(age),
+      bio: bio || '',
+      photos: photos
+    };
+
+    try {
+      const user = await prisma.user.update({
+        where: { id: userId },
+        data: {
+          typeDescription,
+          datingIntentions,
+          hasCompletedOnboarding: true,
+          profile: JSON.stringify(profile)
+        },
+        include: { college: true, cluster: true }
+      });
+
+      const formatted = {
+        ...user,
+        _id: user.id,
+        profile: JSON.parse(user.profile)
+      };
+      delete formatted.password;
+
+      return res.json({ message: 'Onboarding completed', user: formatted });
+    } catch (dbError) {
+      console.warn('Prisma onboarding error:', dbError.message);
     }
 
-    if (text.length > 280) {
-      return res.status(400).json({ message: 'Reply must be 280 characters or less' })
-    }
-
-    // Find the user who owns the tweet
-    const user = await User.findOne({ 'tweets._id': tweetId })
-    
-    if (!user) {
-      return res.status(404).json({ message: 'Tweet not found' })
-    }
-
-    const tweet = user.tweets.id(tweetId)
-    if (!tweet) {
-      return res.status(404).json({ message: 'Tweet not found' })
-    }
-
-    // Initialize replies array if it doesn't exist
-    if (!tweet.replies) {
-      tweet.replies = []
-    }
-
-    // Add reply
-    tweet.replies.push({
-      user: userId,
-      text: text.trim(),
-      createdAt: new Date()
-    })
-
-    await user.save()
-
-    // Populate the reply with user info
-    await user.populate('tweets.replies.user', 'firstName lastName profile.photos')
-
-    const addedReply = tweet.replies[tweet.replies.length - 1]
-
-    res.json({ 
-      message: 'Reply added successfully', 
-      reply: addedReply
-    })
+    res.status(503).json({ message: 'Database error' });
   } catch (error) {
-    console.error('Reply to tweet error:', error)
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
-})
+});
 
-// Get feed of tweets from matched users
-router.get('/feed', authenticate, async (req, res) => {
+// Get potential matches
+router.get('/potential-matches', authenticate, async (req, res) => {
   try {
-    const userId = req.user._id
+    const userId = req.user.id || req.user._id;
+    try {
+      const currentUser = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { clusterId: true }
+      });
 
-    // Get current user with matches
-    const currentUser = await User.findById(userId)
-    if (!currentUser) {
-      return res.status(404).json({ message: 'User not found' })
+      if (!currentUser?.clusterId) return res.json([]);
+
+      // Get users in same cluster who are NOT the current user
+      // Simple logic for now: all others in cluster
+      const others = await prisma.user.findMany({
+        where: {
+          clusterId: currentUser.clusterId,
+          id: { not: userId },
+          isActive: true,
+          hasCompletedOnboarding: true
+        },
+        include: { college: true },
+        take: 25
+      });
+
+      return res.json(others.map(u => ({
+        ...u,
+        _id: u.id,
+        profile: u.profile ? JSON.parse(u.profile) : {}
+      })));
+    } catch (e) {
+      return res.json([]);
     }
-
-    // Get all matched user IDs
-    const matchedUserIds = currentUser.matches
-      .filter(m => m.status === 'matched')
-      .map(m => m.user)
-
-    // Include own user ID
-    matchedUserIds.push(userId)
-
-    // Get all users with tweets
-    const usersWithTweets = await User.find({
-      _id: { $in: matchedUserIds },
-      'tweets.0': { $exists: true }
-    })
-      .select('_id firstName lastName profile.photos tweets')
-      .populate('tweets.replies.user', 'firstName lastName profile.photos')
-
-    // Flatten all tweets with user info
-    const feedTweets = []
-    usersWithTweets.forEach(user => {
-      user.tweets.forEach(tweet => {
-        feedTweets.push({
-          _id: tweet._id,
-          text: tweet.text,
-          likes: tweet.likes,
-          replies: tweet.replies || [],
-          createdAt: tweet.createdAt,
-          user: {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            photo: user.profile?.photos?.[0]
-          }
-        })
-      })
-    })
-
-    // Sort by date, newest first
-    feedTweets.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-
-    res.json(feedTweets)
   } catch (error) {
-    console.error('Get feed error:', error)
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: 'Server error' });
   }
-})
+});
 
-	// Get user profile
-	router.get('/profile', authenticate, async (req, res) => {
-	  try {
-	    const user = await User.findById(req.user._id)
-	      .select('-password')
-	      .populate('college cluster');
-	    res.json(user);
-	  } catch (error) {
-	    res.status(500).json({ message: 'Server error', error: error.message });
-	  }
-	});
+// Leaderboard
+router.get('/leaderboard', authenticate, async (req, res) => {
+  try {
+    const userId = req.user.id || req.user._id;
+    try {
+      const currentUser = await prisma.user.findUnique({ where: { id: userId } });
+      if (!currentUser?.clusterId) return res.status(400).json({ message: 'No cluster assigned' });
 
-	// Update user profile (generic update)
-	router.put('/profile', authenticate, async (req, res) => {
-	  try {
-	    const updates = req.body;
-	    const user = await User.findByIdAndUpdate(
-	      req.user._id,
-	      { $set: updates },
-	      { new: true, runValidators: true }
-	    ).select('-password').populate('college cluster');
-	    
-	    res.json(user);
-	  } catch (error) {
-	    res.status(500).json({ message: 'Server error', error: error.message });
-	  }
-	});
+      const users = await prisma.user.findMany({
+        where: { clusterId: currentUser.clusterId, isActive: true },
+        include: { college: true, _count: { select: { likesReceived: true } } },
+        orderBy: { likesReceived: { _count: 'desc' } },
+        take: 10
+      });
 
-	// Complete onboarding - immediate access
-	router.post('/onboarding', authenticate, async (req, res) => {
-	  try {
-	    const { typeDescription, bio, age, datingIntentions, photos } = req.body;
-
-	    if (!age) {
-	      return res.status(400).json({ message: 'Age is required' });
-	    }
-	    if (!datingIntentions) {
-	      return res.status(400).json({ message: 'Dating intentions are required' });
-	    }
-	    if (!Array.isArray(photos) || photos.length < 1) {
-	      return res.status(400).json({ message: 'Please upload at least 1 photo' });
-	    }
-
-	    const setOps = {
-	      typeDescription: typeDescription || '',
-	      datingIntentions,
-	      hasCompletedOnboarding: true,
-	      'profile.age': Number(age),
-	      'profile.bio': bio || '',
-	      'profile.photos': photos,
-	    };
-
-	    const user = await User.findByIdAndUpdate(
-	      req.user._id,
-	      { $set: setOps },
-	      { new: true, runValidators: true }
-	    )
-	      .select('-password')
-	      .populate('college cluster');
-
-	    res.json({
-	      message: 'Onboarding completed',
-	      user,
-	    });
-	  } catch (error) {
-	    console.error('Onboarding error:', error);
-	    res.status(500).json({ message: 'Server error', error: error.message });
-	  }
-	});
-
-	// Get potential matches (users from same cluster, not already matched/passed/requested)
-	router.get('/potential-matches', authenticate, async (req, res) => {
-	  try {
-	    const currentUser = await User.findById(req.user._id)
-	      .select('-password')
-	      .populate('cluster');
-	    
-	    if (!currentUser.cluster) {
-	      return res.json([]);
-	    }
-
-	    const sent = (currentUser.followRequestsSent || []).map(String);
-	    const received = (currentUser.followRequestsReceived || []).map(r => String(r.user));
-	    const matched = (currentUser.matches || []).map(m => String(m.user));
-	    const passed = (currentUser.passed || []).map(String);
-
-	    // Get all users from the same cluster, excluding current user
-	    const potentialMatches = await User.find({
-	      cluster: currentUser.cluster._id,
-	      _id: { $ne: currentUser._id },
-	      isActive: true,
-	      $and: [
-	        { _id: { $nin: sent } },
-	        { _id: { $nin: received } },
-	        { _id: { $nin: passed } },
-	        { _id: { $nin: matched } },
-	      ],
-	    })
-	      .select('-password')
-	      .populate('college')
-	      .limit(25);
-
-	    res.json(potentialMatches);
-	  } catch (error) {
-	    console.error('Get potential matches error:', error);
-	    res.status(500).json({ message: 'Server error', error: error.message });
-	  }
-	});
-
-	// Leaderboard: top users in the same cluster by received follow request count
-	router.get('/leaderboard', authenticate, async (req, res) => {
-	  try {
-	    const currentUser = await User.findById(req.user._id).populate('cluster');
-
-	    if (!currentUser.cluster) {
-	      return res.status(400).json({ message: 'User not assigned to a cluster' });
-	    }
-
-	    const users = await User.find({
-	      cluster: currentUser.cluster._id,
-	      isActive: true,
-	    })
-	      .select('-password')
-	      .populate('college');
-
-	    const leaderboard = users
-	      .map(u => ({
-	        id: u._id,
-	        firstName: u.firstName,
-	        lastName: u.lastName,
-	        college: u.college?.name,
-	        profilePhoto: u.profile?.photos?.[0] || null,
-	        requestCount: (u.followRequestsReceived || []).length,
-	      }))
-	      .sort((a, b) => b.requestCount - a.requestCount)
-	      .slice(0, 10);
-
-	    res.json(leaderboard);
-	  } catch (error) {
-	    console.error('Get leaderboard error:', error);
-	    res.status(500).json({ message: 'Server error', error: error.message });
-	  }
-	});
+      return res.json(users.map(u => ({
+        id: u.id,
+        _id: u.id,
+        firstName: u.firstName,
+        lastName: u.lastName,
+        college: u.college?.name,
+        profilePhoto: u.profile ? JSON.parse(u.profile).photos?.[0] : null,
+        requestCount: u._count.likesReceived
+      })));
+    } catch (e) {
+      return res.json([]);
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;
 

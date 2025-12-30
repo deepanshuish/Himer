@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
+import API_URL from '@/lib/api'
 
 interface User {
   _id: string
@@ -83,7 +84,7 @@ export default function MatchesPage() {
   const loadPotentialMatches = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/potential-matches`,
+        `${API_URL}/api/users/potential-matches`,
         { headers: getAuthHeaders() }
       )
       setPotentialMatches(response.data)
@@ -101,7 +102,7 @@ export default function MatchesPage() {
   const handleLike = async (userId: string) => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches/like/${userId}`,
+        `${API_URL}/api/matches/like/${userId}`,
         {},
         { headers: getAuthHeaders() }
       )
@@ -117,7 +118,7 @@ export default function MatchesPage() {
   const handlePass = async (userId: string) => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches/pass/${userId}`,
+        `${API_URL}/api/matches/pass/${userId}`,
         {},
         { headers: getAuthHeaders() }
       )
@@ -131,7 +132,7 @@ export default function MatchesPage() {
   const loadCurrentUser = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`,
+        `${API_URL}/api/auth/me`,
         { headers: getAuthHeaders() }
       )
       setCurrentUserId(res.data?._id || '')
@@ -143,7 +144,7 @@ export default function MatchesPage() {
   const loadFeed = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/feed`,
+        `${API_URL}/api/users/feed`,
         { headers: getAuthHeaders() }
       )
       setFeed(res.data)
@@ -159,7 +160,7 @@ export default function MatchesPage() {
     setPosting(true)
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/tweet`,
+        `${API_URL}/api/users/tweet`,
         { text: tweetText },
         { headers: getAuthHeaders() }
       )
@@ -177,7 +178,7 @@ export default function MatchesPage() {
   const handleLikeTweet = async (tweetId: string) => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/tweet/${tweetId}/like`,
+        `${API_URL}/api/users/tweet/${tweetId}/like`,
         {},
         { headers: getAuthHeaders() }
       )
@@ -192,7 +193,7 @@ export default function MatchesPage() {
 
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/tweet/${tweetId}/reply`,
+        `${API_URL}/api/users/tweet/${tweetId}/reply`,
         { text: replyText },
         { headers: getAuthHeaders() }
       )
@@ -343,21 +344,19 @@ export default function MatchesPage() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setShowFeed(true)}
-                className={`px-4 py-2 rounded-xl font-medium transition-all text-sm ${
-                  showFeed
-                    ? 'bg-cyan-600 text-white'
-                    : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
-                }`}
+                className={`px-4 py-2 rounded-xl font-medium transition-all text-sm ${showFeed
+                  ? 'bg-cyan-600 text-white'
+                  : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
+                  }`}
               >
                 Updates Feed
               </button>
               <button
                 onClick={() => setShowFeed(false)}
-                className={`px-4 py-2 rounded-xl font-medium transition-all text-sm ${
-                  !showFeed
-                    ? 'bg-cyan-600 text-white'
-                    : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
-                }`}
+                className={`px-4 py-2 rounded-xl font-medium transition-all text-sm ${!showFeed
+                  ? 'bg-cyan-600 text-white'
+                  : 'text-gray-700 hover:bg-cyan-50 hover:text-cyan-600'
+                  }`}
               >
                 Discover People
               </button>
@@ -412,11 +411,10 @@ export default function MatchesPage() {
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => handleLikeTweet(tweet._id)}
-                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                          tweet.likes.includes(currentUserId)
-                            ? 'bg-red-100 text-red-600'
-                            : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
-                        }`}
+                        className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${tweet.likes.includes(currentUserId)
+                          ? 'bg-red-100 text-red-600'
+                          : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
+                          }`}
                       >
                         <svg className="w-4 h-4" fill={tweet.likes.includes(currentUserId) ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -509,80 +507,80 @@ export default function MatchesPage() {
             /* Discover People Section */
             <div>
               {hasMatches ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {potentialMatches.slice(0, 25).map((profile, index) => (
-                <div 
-                  key={profile._id} 
-                  className="glass-effect rounded-xl p-6 space-y-4 hover:shadow-lg transition-all duration-300 animate-fade-in-up border border-cyan-100"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <div className="text-center">
-                    {profile.profile?.photos?.[0] ? (
-                      <img
-                        src={profile.profile.photos[0]}
-                        alt={`${profile.firstName} ${profile.lastName}`}
-                        className="w-16 h-16 rounded-full mx-auto object-cover border-2 border-white shadow-md"
-                      />
-                    ) : (
-                      <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-lg font-bold bg-cyan-600 text-white shadow-md">
-                        {profile.firstName[0]}
-                        {profile.lastName[0]}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {potentialMatches.slice(0, 25).map((profile, index) => (
+                    <div
+                      key={profile._id}
+                      className="glass-effect rounded-xl p-6 space-y-4 hover:shadow-lg transition-all duration-300 animate-fade-in-up border border-cyan-100"
+                      style={{ animationDelay: `${index * 0.05}s` }}
+                    >
+                      <div className="text-center">
+                        {profile.profile?.photos?.[0] ? (
+                          <img
+                            src={profile.profile.photos[0]}
+                            alt={`${profile.firstName} ${profile.lastName}`}
+                            className="w-16 h-16 rounded-full mx-auto object-cover border-2 border-white shadow-md"
+                          />
+                        ) : (
+                          <div className="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-lg font-bold bg-cyan-600 text-white shadow-md">
+                            {profile.firstName[0]}
+                            {profile.lastName[0]}
+                          </div>
+                        )}
+                        <h3 className="text-lg font-bold text-gray-900 mt-3">
+                          {profile.firstName} {profile.lastName}
+                        </h3>
+                        {profile.college && (
+                          <p className="text-gray-600 text-xs">{profile.college.name}</p>
+                        )}
                       </div>
-                    )}
-                    <h3 className="text-lg font-bold text-gray-900 mt-3">
-                      {profile.firstName} {profile.lastName}
-                    </h3>
-                    {profile.college && (
-                      <p className="text-gray-600 text-xs">{profile.college.name}</p>
-                    )}
-                  </div>
-                  {profile.profile && (
-                    <p className="text-xs text-gray-600 line-clamp-3">{profile.profile.bio}</p>
-                  )}
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handlePass(profile._id)}
-                      className="flex-1 py-2 border border-gray-200 text-gray-700 font-medium text-sm rounded-xl hover:bg-gray-50 transition-all"
-                    >
-                      Skip
-                    </button>
-                    <button
-                      onClick={() => handleLike(profile._id)}
-                      className="flex-1 py-2 bg-cyan-600 text-white font-medium text-sm rounded-xl hover:bg-cyan-700 transition-all"
-                    >
-                      Follow
-                    </button>
-                  </div>
-                  <Link
-                    href={`/profile/${profile._id}`}
-                    className="block text-center py-2 text-cyan-600 font-medium text-sm hover:text-cyan-700 transition-all"
-                  >
-                    View Profile
-                  </Link>
+                      {profile.profile && (
+                        <p className="text-xs text-gray-600 line-clamp-3">{profile.profile.bio}</p>
+                      )}
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handlePass(profile._id)}
+                          className="flex-1 py-2 border border-gray-200 text-gray-700 font-medium text-sm rounded-xl hover:bg-gray-50 transition-all"
+                        >
+                          Skip
+                        </button>
+                        <button
+                          onClick={() => handleLike(profile._id)}
+                          className="flex-1 py-2 bg-cyan-600 text-white font-medium text-sm rounded-xl hover:bg-cyan-700 transition-all"
+                        >
+                          Follow
+                        </button>
+                      </div>
+                      <Link
+                        href={`/profile/${profile._id}`}
+                        className="block text-center py-2 text-cyan-600 font-medium text-sm hover:text-cyan-700 transition-all"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="glass-effect rounded-xl p-12 text-center space-y-4 animate-fade-in border border-cyan-100">
-              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
-                <svg className="w-8 h-8 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-lg font-bold text-gray-900 mb-1">Profiles Coming Soon</p>
-                <p className="text-sm text-gray-600">New matches appear regularly</p>
-              </div>
-              <div className="flex justify-center gap-3 flex-wrap">
-                <Link href="/leaderboard" className="px-5 py-2 rounded-xl border border-gray-200 font-medium text-gray-700 hover:border-cyan-300 transition-all text-sm">
-                  Leaderboard
-                </Link>
-                <Link href="/requests" className="px-5 py-2 rounded-xl bg-cyan-600 text-white font-medium hover:bg-cyan-700 transition-all text-sm">
-                  Requests
-                </Link>
-              </div>
-            </div>
-          )}
+              ) : (
+                <div className="glass-effect rounded-xl p-12 text-center space-y-4 animate-fade-in border border-cyan-100">
+                  <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto">
+                    <svg className="w-8 h-8 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-gray-900 mb-1">Profiles Coming Soon</p>
+                    <p className="text-sm text-gray-600">New matches appear regularly</p>
+                  </div>
+                  <div className="flex justify-center gap-3 flex-wrap">
+                    <Link href="/leaderboard" className="px-5 py-2 rounded-xl border border-gray-200 font-medium text-gray-700 hover:border-cyan-300 transition-all text-sm">
+                      Leaderboard
+                    </Link>
+                    <Link href="/requests" className="px-5 py-2 rounded-xl bg-cyan-600 text-white font-medium hover:bg-cyan-700 transition-all text-sm">
+                      Requests
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </section>

@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import API_URL from '@/lib/api'
 
 export default function MyProfileRedirect() {
   const router = useRouter()
@@ -18,7 +19,7 @@ export default function MyProfileRedirect() {
 
         // Get current user
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`,
+          `${API_URL}/api/auth/me`,
           { headers: { Authorization: `Bearer ${token}` } }
         )
 

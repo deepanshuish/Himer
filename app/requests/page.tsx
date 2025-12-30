@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Link from 'next/link'
+import API_URL from '@/lib/api'
 
 interface RequestItem {
   id: string
@@ -36,7 +37,7 @@ export default function RequestsPage() {
   const loadRequests = async () => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches/requests`,
+        `${API_URL}/api/matches/requests`,
         { headers: getAuthHeaders() }
       )
       setRequests(res.data)
@@ -55,7 +56,7 @@ export default function RequestsPage() {
   const accept = async (userId: string) => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches/accept/${userId}`,
+        `${API_URL}/api/matches/accept/${userId}`,
         {},
         { headers: getAuthHeaders() }
       )
@@ -70,7 +71,7 @@ export default function RequestsPage() {
   const reject = async (userId: string) => {
     try {
       await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/matches/reject/${userId}`,
+        `${API_URL}/api/matches/reject/${userId}`,
         {},
         { headers: getAuthHeaders() }
       )
@@ -164,8 +165,8 @@ export default function RequestsPage() {
             {requests.map((r, index) => {
               const photo = r.profile?.photos?.[0]
               return (
-                <div 
-                  key={r.id} 
+                <div
+                  key={r.id}
                   className="glass-effect rounded-xl p-6 space-y-4 hover:shadow-lg transition-all duration-300 animate-fade-in-up border border-cyan-100"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
