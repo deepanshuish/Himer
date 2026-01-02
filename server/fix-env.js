@@ -4,8 +4,8 @@ const path = require('path');
 const envPath = path.resolve(__dirname, '../.env');
 
 // The correctly encoded connection string
-// Comuno@2004 -> Comuno%402004
-const dbUrl = 'sqlserver://comuno.database.windows.net:1433;database=comuno;user=CloudSAe20540ec;password=Comuno%402004;encrypt=true;trustServerCertificate=false;loginTimeout=30;';
+// Test confirmed RAW string works: Comuno@2004
+const dbUrl = 'sqlserver://comuno.database.windows.net:1433;database=comuno;user=CloudSAe20540ec;password=Comuno@2004;encrypt=true;trustServerCertificate=false;loginTimeout=30;';
 const jwtSecret = 'comuno_prod_secret_8822';
 
 const envContent = `DATABASE_URL="${dbUrl}"
