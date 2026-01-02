@@ -200,6 +200,8 @@ export default function ProfilePage() {
     )
   }
 
+  if (!userProfile) return null
+
   const isOwnProfile = currentUserId === userId
 
   return (
@@ -260,6 +262,7 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
+
         </div>
 
         {/* Tweet Form (only for own profile) */}
