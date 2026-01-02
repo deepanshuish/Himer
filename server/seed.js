@@ -1,6 +1,6 @@
-const prisma = require('./utils/prisma');
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const prisma = require('./utils/prisma');
 const axios = require('axios');
 const { fetchNirfRanking, parseNirfListHtml } = require('./utils/nirf');
 const { generateClusters, inferGenderType } = require('./utils/cluster-generator');
