@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'Connect with students from your college cluster',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
   children,
 }: {
