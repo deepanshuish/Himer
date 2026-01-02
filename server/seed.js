@@ -116,7 +116,7 @@ async function seed() {
         }
       });
 
-      const collegeIds = triple.map(c => c.id);
+      const collegeIds = triple.map(c => c._id || c.id);
       await prisma.college.updateMany({
         where: { id: { in: collegeIds } },
         data: { clusterId: cluster.id }
