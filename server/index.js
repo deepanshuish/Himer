@@ -42,6 +42,11 @@ app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/api/health`);
 
+  // Debug DB URL (masked)
+  const dbUrl = process.env.DATABASE_URL || '';
+  const maskedUrl = dbUrl.replace(/:([^:@]+)@/, ':****@').replace(/password=[^;]+/, 'password=****');
+  console.log(`Database URL: ${maskedUrl}`);
+
   // Try to connect to SQL Database
   try {
     await prisma.$connect();
