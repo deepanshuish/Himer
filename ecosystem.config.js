@@ -16,9 +16,9 @@ module.exports = {
             args: 'index.js',
             env: {
                 NODE_ENV: 'production',
-                PORT: 5001,
-                DATABASE_URL: 'REPLACE_WITH_YOUR_AZURE_SQL_CONNECTION_STRING',
-                JWT_SECRET: 'REPLACE_WITH_A_SECURE_SECRET'
+                PORT: 5000,
+                DATABASE_URL: 'sqlserver://comuno.database.windows.net:1433;database=comuno;user=CloudSAe20540ec;password={your_password};encrypt=true;trustServerCertificate=false;loginTimeout=30;',
+                JWT_SECRET: 'comuno_prod_secret_8822'
             }
         }
     ]
