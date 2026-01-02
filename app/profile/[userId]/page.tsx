@@ -314,15 +314,15 @@ export default function ProfilePage() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => handleLikeTweet(tweet._id)}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${tweet.likes.includes(currentUserId || '')
+                      className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${(tweet.likes || []).includes(currentUserId || '')
                         ? 'bg-red-100 text-red-600'
                         : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
                         }`}
                     >
-                      <svg className="w-4 h-4" fill={tweet.likes.includes(currentUserId || '') ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4" fill={(tweet.likes || []).includes(currentUserId || '') ? 'currentColor' : 'none'} viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                       </svg>
-                      <span>{tweet.likes.length}</span>
+                      <span>{(tweet.likes || []).length}</span>
                     </button>
                     <button
                       onClick={() => setReplyingTo(replyingTo === tweet._id ? null : tweet._id)}

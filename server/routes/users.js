@@ -29,6 +29,7 @@ router.get('/profile/:userId', authenticate, async (req, res) => {
             orderBy: { createdAt: 'desc' },
             include: {
               user: { select: { firstName: true, lastName: true, profile: true } },
+              likes: { select: { userId: true } },
               replies: {
                 include: {
                   user: { select: { firstName: true, lastName: true, profile: true } }
@@ -63,6 +64,7 @@ router.get('/profile/:userId', authenticate, async (req, res) => {
         tweets: user.tweets.map(t => ({
           ...t,
           _id: t.id,
+          likes: t.likes.map(l => l.userId), // Convert to array of user IDs
           user: {
             _id: user.id,
             firstName: user.firstName,
@@ -204,15 +206,15 @@ router.post('/onboarding', authenticate, async (req, res) => {
     const profile = {
       age: Number(age),
       bio: bio || '',
-      photos: photos
+      photos: photos,
+      typeDescription,
+      datingIntentions
     };
 
     try {
       const user = await prisma.user.update({
         where: { id: userId },
         data: {
-          typeDescription,
-          datingIntentions,
           hasCompletedOnboarding: true,
           profile: JSON.stringify(profile)
         },
@@ -304,6 +306,117 @@ router.get('/leaderboard', authenticate, async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Like/Unlike a tweet
+router.post('/tweet/:tweetId/like', authenticate, async (req, res) => {
+  try {
+    const { tweetId } = req.params;
+    const userId = req.user.id || req.user._id;
+
+    try {
+      // Check if already liked
+      const existingLike = await prisma.tweetLike.findUnique({
+        where: {
+          tweetId_userId: { tweetId, userId }
+        }
+      });
+
+      if (existingLike) {
+        // Unlike - delete the like
+        await prisma.tweetLike.delete({
+          where: { id: existingLike.id }
+        });
+        return res.json({ message: 'Tweet unliked', liked: false });
+      } else {
+        // Like - create new like
+        await prisma.tweetLike.create({
+          data: { tweetId, userId }
+        });
+        return res.json({ message: 'Tweet liked', liked: true });
+      }
+    } catch (dbError) {
+      console.warn('Prisma like tweet error:', dbError.message);
+    }
+
+    res.status(503).json({ message: 'Database error' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Delete a tweet
+router.delete('/tweet/:tweetId', authenticate, async (req, res) => {
+  try {
+    const { tweetId } = req.params;
+    const userId = req.user.id || req.user._id;
+
+    try {
+      // Verify ownership
+      const tweet = await prisma.tweet.findUnique({ where: { id: tweetId } });
+      if (!tweet) return res.status(404).json({ message: 'Tweet not found' });
+      if (tweet.userId !== userId) return res.status(403).json({ message: 'Not authorized' });
+
+      // Delete replies and likes first (due to foreign keys)
+      await prisma.reply.deleteMany({ where: { tweetId } });
+      await prisma.tweetLike.deleteMany({ where: { tweetId } });
+      await prisma.tweet.delete({ where: { id: tweetId } });
+
+      return res.json({ message: 'Tweet deleted successfully' });
+    } catch (dbError) {
+      console.warn('Prisma delete tweet error:', dbError.message);
+    }
+
+    res.status(503).json({ message: 'Database error' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Reply to a tweet
+router.post('/tweet/:tweetId/reply', authenticate, async (req, res) => {
+  try {
+    const { tweetId } = req.params;
+    const { text } = req.body;
+    const userId = req.user.id || req.user._id;
+
+    if (!text || text.trim().length === 0) {
+      return res.status(400).json({ message: 'Reply text is required' });
+    }
+
+    try {
+      const reply = await prisma.reply.create({
+        data: {
+          text: text.trim(),
+          tweetId,
+          userId
+        },
+        include: {
+          user: { select: { firstName: true, lastName: true, profile: true } }
+        }
+      });
+
+      return res.json({
+        message: 'Reply posted',
+        reply: {
+          ...reply,
+          _id: reply.id,
+          user: {
+            _id: reply.userId,
+            firstName: reply.user.firstName,
+            lastName: reply.user.lastName,
+            photo: reply.user.profile ? JSON.parse(reply.user.profile).photos?.[0] : null
+          }
+        }
+      });
+    } catch (dbError) {
+      console.warn('Prisma reply error:', dbError.message);
+    }
+
+    res.status(503).json({ message: 'Database error' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 

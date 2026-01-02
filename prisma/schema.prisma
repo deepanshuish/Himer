@@ -3,10 +3,12 @@
 
 generator client {
   provider = "prisma-client-js"
+  engineType = "library"
 }
 
 datasource db {
   provider = "sqlserver"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -21,13 +23,14 @@ model User {
   clusterId              String?
   isVerified             Boolean   @default(false)
   hasCompletedOnboarding Boolean   @default(false)
+  isActive               Boolean   @default(true)
   homepageUnlockAt       DateTime?
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
   
   // Profile & Preferences stored as JSON for flexibility
-  profile                String?   // serialized JSON
-  preferences            String?   // serialized JSON
+  profile                String?   @db.NVarChar(Max) // serialized JSON with photos
+  preferences            String?   @db.NVarChar(Max) // serialized JSON
   
   // Relations
   college                College   @relation(fields: [collegeId], references: [id], onUpdate: NoAction, onDelete: NoAction)
