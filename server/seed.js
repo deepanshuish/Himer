@@ -35,6 +35,15 @@ async function seed() {
 
     // Clear existing data (caution: deletes everything)
     console.log('Clearing existing data...');
+    // Delete dependents first to satisfy foreign keys
+    await prisma.tweetLike.deleteMany({});
+    await prisma.reply.deleteMany({});
+    await prisma.tweet.deleteMany({});
+    await prisma.like.deleteMany({});
+    await prisma.match.deleteMany({});
+    await prisma.passed.deleteMany({});
+    await prisma.message.deleteMany({});
+
     await prisma.user.deleteMany({});
     await prisma.college.deleteMany({});
     await prisma.cluster.deleteMany({});
