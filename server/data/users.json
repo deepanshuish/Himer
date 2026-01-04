@@ -39,5 +39,21 @@
     "hasCompletedOnboarding": false,
     "createdAt": "2026-01-02T20:31:09.658Z",
     "updatedAt": "2026-01-02T20:31:09.658Z"
+  },
+  {
+    "_id": "user_1767515887810",
+    "id": "user_1767515887810",
+    "email": "san@iitb.ac.in",
+    "password": "$2a$10$ouuNCUpm.NjpSBpIkBwY0ONknmn5pI173xA66J9TjeUjD/fYQBLPW",
+    "firstName": "Sanshay",
+    "lastName": "Sanshay",
+    "gender": "male",
+    "collegeStatus": "studying",
+    "collegeId": "eng_3",
+    "clusterId": null,
+    "isVerified": true,
+    "hasCompletedOnboarding": false,
+    "createdAt": "2026-01-04T08:38:07.810Z",
+    "updatedAt": "2026-01-04T08:38:07.810Z"
   }
 ]
